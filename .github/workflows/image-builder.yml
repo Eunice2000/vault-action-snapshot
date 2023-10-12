@@ -9,9 +9,10 @@ jobs:
       - name: Import Secrets
         uses: hashicorp/vault-action@v2.4.0
         with:
-          url: http://127.0.0.1:8200
-          tlsSkipVerify: true
-          token: ${{ secrets.VAULT_TOKEN }}
+          url: https://clustertest-http-vault-4bc39b71.j.cloud.hashicorp.com
+          method: approle
+          roleId: ${{ secrets.VAULT_ROLE_ID }}
+          secretId: ${{ secrets.VAULT_SECRET_ID }}
           secrets: |
             secret/data/ci app_secret
       - name: Build Docker Image
