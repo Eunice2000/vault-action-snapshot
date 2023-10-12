@@ -18,6 +18,5 @@ jobs:
           secretId: ${{ secrets.VAULT_SECRET_ID }}
           secrets: |
             secret/test/webapp
-      - name: Build Docker Image
-        run: docker build . --file Dockerfile --build-arg app_secret="${{ env.APP_SECRET }}" -t vault-action-exampleapp
+     
 
