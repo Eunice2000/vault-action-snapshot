@@ -14,12 +14,18 @@ jobs:
 
       - name: Install Vault
         run: |
-          # Download and install Vault
-          curl -LO https://releases.hashicorp.com/vault/<vault-version>/vault_<vault-version>_linux_amd64.zip
-          unzip vault_<vault-version>_linux_amd64.zip
-          sudo mv vault /usr/local/bin/
-        env:
-          vault-version: 1.8.0 # Use the specific version of Vault you need
+          # Manually specify the architecture for x64 (amd64) Linux runner
+          ARCH=amd64
+
+          # Manually specify the Vault version you want to install
+          VAULT_VERSION=1.8.2
+
+          # Download and install the specified Vault binary
+          curl -fsSL "https://releases.hashicorp.com/vault/${VAULT_VERSION}/vault_${VAULT_VERSION}_linux_${ARCH}.zip" -o vault.zip
+          unzip vault.zip
+          sudo mv vault /usr/local/bin/vault
+          vault --version
+          shell: bash
 
 
       - name: Set up Vault Secrets
