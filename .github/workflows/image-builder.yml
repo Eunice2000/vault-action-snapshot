@@ -12,6 +12,16 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
+      - name: Install Vault
+        run: |
+          # Download and install Vault
+          curl -LO https://releases.hashicorp.com/vault/<vault-version>/vault_<vault-version>_linux_amd64.zip
+          unzip vault_<vault-version>_linux_amd64.zip
+          sudo mv vault /usr/local/bin/
+        env:
+          vault-version: 1.8.0 # Use the specific version of Vault you need
+
+
       - name: Set up Vault Secrets
         env:
           VAULT_ROLE_ID: ${{ secrets.VAULT_ROLE_ID }}
